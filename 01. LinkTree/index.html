@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>LinkTree</title>
+</head>
+<body>
+    <img id="profilePhoto" src="" alt="" style="border-radius: 50%;" width="300px">
+    <p id="name"></p>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            let genderToPick = Math.floor(Math.random()*2) // 0 - male , 1 - female
+            let gender = 'female'
+            let g = 'f'
+            if(genderToPick == 0){
+                gender = 'male'
+                g='m'
+            }
+            let url=""
+            $.get("https://this-person-does-not-exist.com/new?time=1688818729223&gender="+gender+"&age=20-30&etnic=indian",function(data){
+                url = "https://this-person-does-not-exist.com"+data.src;
+                $("#profilePhoto").attr("src",url);
+            })
+            let personName=""
+            $.get("https://www.behindthename.com/random/random.php?gender="+g+"&number=1&sets=1&surname=&randomsurname=yes&usage_ind=1",function(data){
+                personName = $(data).find("div.random-results").text().trim()
+                console.clear()
+                console.log("Gender:",gender,"| Name: ",personName)
+                $("#name").text(personName)
+            })
+
+
+        })
+    </script>
+</body>
